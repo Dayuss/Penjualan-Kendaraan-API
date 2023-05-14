@@ -2,6 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\ApiController;
+use App\Http\Middleware\JwtMiddleware;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +22,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('login', [ApiController::class, 'authenticate']);
+Route::post('register', [ApiController::class, 'register']);
+Route::get('/vehicle', [VehicleController::class, 'index'])->middleware(JwtMiddleware::class);
