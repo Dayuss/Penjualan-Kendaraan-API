@@ -21,8 +21,12 @@ class Vehicle extends Eloquent
      */
 
     protected $fillable = [
-
-        'mesin', 'prosesor', 'penyimpanan', 'ram'
-
+        'engine', 
+        'capacity',
+        'type', 
+        'suspension_type',
+        'transmission_type',
+        'additional_info',
+        'vehicle_type'
     ];
 }

@@ -26,3 +26,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
 Route::get('/vehicle', [VehicleController::class, 'index'])->middleware(JwtMiddleware::class);
+Route::post('/vehicle', [VehicleController::class, 'store'])->middleware(JwtMiddleware::class);
