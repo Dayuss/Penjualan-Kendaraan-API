@@ -1,0 +1,189 @@
+{
+	"info": {
+		"_postman_id": "a122da8f-cca7-435d-abf9-7ff3798c02a5",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2643413",
+		"_collection_link": "https://www.postman.com/blue-satellite-9607/workspace/testing-kerja/collection/2643413-a122da8f-cca7-435d-abf9-7ff3798c02a5?action=share&creator=2643413&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"admin@mail.com\",\r\n    \"password\":\"admin1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"admin@mail.com\",\r\n    \"password\":\"admin1\",\r\n    \"name\": \"administrator\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/register",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Vehicle Stock",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/vehicle",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vehicle_type\":\"car\",\r\n    \"engine\":\"diesel\",\r\n    \"capacity\":\"4\",\r\n    \"type\":\"manual\",\r\n    \"suspension_type\":\"\",\r\n    \"transmission_type\":\"\",\r\n    \"vehicle_year\":\"2003\",\r\n    \"color\":\"red\",\r\n    \"price\":\"900000\",\r\n    \"stock\":100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/vehicle",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"vehicle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sale Vehicle",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"item_id\":\"64623a744a35d8d75e0a69f6\",\r\n    \"qty\":\"5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/sales",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sales Report",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/sales",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"sales"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
