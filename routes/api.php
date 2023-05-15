@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\SalesController;
 use App\Http\Middleware\JwtMiddleware;
 
 
@@ -25,5 +26,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('login', [ApiController::class, 'authenticate']);
 Route::post('register', [ApiController::class, 'register']);
-Route::get('/vehicle', [VehicleController::class, 'index'])->middleware(JwtMiddleware::class);
-Route::post('/vehicle', [VehicleController::class, 'store'])->middleware(JwtMiddleware::class);
+
+Route::get('vehicle', [VehicleController::class, 'index'])->middleware(JwtMiddleware::class);
+Route::post('vehicle', [VehicleController::class, 'store'])->middleware(JwtMiddleware::class);
+
+Route::get('sales', [SalesController::class, 'index'])->middleware(JwtMiddleware::class);
+Route::post('sales', [SalesController::class, 'store'])->middleware(JwtMiddleware::class);
+

@@ -2,12 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Vehicle;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use InvalidArgumentException;
-
+use App\Repositories\VehicleRepository;
 class VehicleService
 {
     /**
@@ -18,11 +13,11 @@ class VehicleService
     /**
      * VehicleService constructor.
      *
-     * @param Vehicle $vehicleRepository
+     * @param VehicleRepository $vehicleRepository
      */
     public function __construct()
     {
-        $this->vehicle = new Vehicle();
+        $this->vehicle = new VehicleRepository();
     }
 
 
@@ -33,7 +28,7 @@ class VehicleService
      */
     public function getAll()
     {
-        return $this->vehicle::all();
+        return $this->vehicle->getAll();
     }
 
     /**
@@ -56,47 +51,6 @@ class VehicleService
      */
     public function saveVehicleData($data)
     {
-        $this->vehicle->vehicle_type = $data['vehicle_type'];
-        $this->vehicle->engine = $data['engine'];
-        $this->vehicle->capacity = $data['capacity'];
-        $this->vehicle->type = $data['type'];
-        $this->vehicle->suspension_type = $data['suspension_type'];
-        $this->vehicle->transmission_type = $data['transmission_type'];
-        $this->vehicle->additional_info = array(
-            "vehicle_year"=>$data['vehicle_year'],
-            "color"=>$data['color'],
-            "price"=>$data['price'],
-            "stock"=>$data['stock'],
-        );
-        // additional_info
-        return $this->vehicle->save();
+        return $this->vehicle->save($data);
     }
-
-    
-    /**
-     * Delete vehicle by id.
-     *
-     * @param $id
-     * @return String
-     */
-    public function deleteById($id)
-    {
-        DB::beginTransaction();
-
-        try {
-            $vehicle = $this->vehicle->delete($id);
-
-        } catch (Exception $e) {
-            DB::rollBack();
-            Log::info($e->getMessage());
-
-            throw new InvalidArgumentException('Unable to delete vehicle data');
-        }
-
-        DB::commit();
-
-        return $vehicle;
-
-    }
-
 }

@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\VehicleService;
+use App\Services\SalesService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-class VehicleController extends Controller
+class SalesController extends Controller
 {
     /**
-     * @var VehicleService
+     * @var SalesService
      */
-    protected $vehicleService;
+    protected $salesService;
 
-    public function __construct(VehicleService $vehicleService)
+    public function __construct(SalesService $salesService)
     {
-        $this->vehicleService = $vehicleService;
+        $this->salesService = $salesService;
     }
 
     /**
-     * show all vehicle
+     * show all sales
      *
      * @return \Illuminate\Http\Response
      */
@@ -27,9 +27,8 @@ class VehicleController extends Controller
     {
         $result = ['status' => 200, 'message'=>'success'];
 
-
         try {
-            $result['data'] = $this->vehicleService->getAll();
+            $result['data'] = $this->salesService->getAll();
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
@@ -42,7 +41,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * store a vehicle
+     * store a sales
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -50,25 +49,14 @@ class VehicleController extends Controller
     public function store(Request $request)
     {
         $data = $request->only(
-            'vehicle_type',
-            'engine',
-            'capacity',
-            'type',
-            'suspension_type',
-            'transmission_type',
-            'vehicle_year',
-            'color',
-            'price',
-            'stock'
+            'qty',
+            'item_id',
         );
         $validator = Validator::make($data, [
-            'vehicle_type'=> 'required',
-            'engine'=> 'required',
-            'vehicle_year'=> 'required',
-            'color'=> 'required',
-            'price'=> 'required',
-            'stock'=> 'required',
+            'qty'=> 'required',
+            'item_id'=> 'required',
         ]);
+        
         if ($validator->fails()) {
             return response()->json(['error' => $validator->messages()], 200);
         }
@@ -76,7 +64,7 @@ class VehicleController extends Controller
         $result = ['status' => 200, 'message'=>'success'];
 
         try {
-            $result['data'] = $this->vehicleService->saveVehicleData($data);
+            $result['data'] = $this->salesService->saveSalesData($data);
         } catch (Exception $e) {
             $result = [
                 'status' => 500,

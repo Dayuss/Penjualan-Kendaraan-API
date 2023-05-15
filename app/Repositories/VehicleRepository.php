@@ -16,9 +16,9 @@ class VehicleRepository
      *
      * @param Vehicle $vehicle
      */
-    public function __construct(Vehicle $vehicle)
+    public function __construct()
     {
-        $this->vehicle = $vehicle;
+        $this->vehicle = new Vehicle();
     }
 
     /**
@@ -40,9 +40,9 @@ class VehicleRepository
      */
     public function getById($id)
     {
-        return $this->vehicle
-            ->where('id', $id)
-            ->get();
+        return ($this->vehicle
+            ->where('_id', $id)
+            ->get())[0];
     }
 
     /**
@@ -55,9 +55,19 @@ class VehicleRepository
     {
         $vehicle = new $this->vehicle;
 
-        $vehicle->title = $data['title'];
-        $vehicle->description = $data['description'];
-
+        $vehicle->vehicle_type = $data['vehicle_type'];
+        $vehicle->engine = $data['engine'];
+        $vehicle->capacity = $data['capacity'];
+        $vehicle->type = $data['type'];
+        $vehicle->suspension_type = $data['suspension_type'];
+        $vehicle->transmission_type = $data['transmission_type'];
+        $vehicle->additional_info = array(
+            "vehicle_year"=>$data['vehicle_year'],
+            "color"=>$data['color'],
+            "price"=>$data['price'],
+            "stock"=>$data['stock'],
+        );
+        // additional_info
         $vehicle->save();
 
         return $vehicle->fresh();
@@ -69,16 +79,16 @@ class VehicleRepository
      * @param $data
      * @return Vehicle
      */
-    public function update($data, $id)
+    public function updateStock($stock, $id)
     {
-        
         $vehicle = $this->vehicle->find($id);
-
-        $vehicle->title = $data['title'];
-        $vehicle->description = $data['description'];
-
+        $vehicle->additional_info = array(
+            "stock"=>$vehicle->additional_info['stock'] - $stock,
+            "vehicle_year"=>$vehicle->additional_info['vehicle_year'],
+            "color"=>$vehicle->additional_info['color'],
+            "price"=>$vehicle->additional_info['price']
+        );
         $vehicle->update();
-
         return $vehicle;
     }
 
