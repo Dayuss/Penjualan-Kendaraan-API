@@ -70,7 +70,7 @@ class VehicleController extends Controller
             'stock'=> 'required',
         ]);
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
+            return response()->json(['error' => $validator->messages()], 400);
         }
 
         $result = ['status' => 200, 'message'=>'success'];
