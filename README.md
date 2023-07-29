@@ -8,7 +8,10 @@
 # Cara Install
 - Clone Repository ini
 - Copy project ke: windows C:/xampp/htdocs | linux /var/www/html
-- Lalu composer install
+- Lalu di terminal/command prompt run command "composer install"
 - copy .env.example dan ubah menjadi .env
 - Sesuaikan data database credential di .env
-- Untuk pengetesan, Siliahkan import collection dan environtment ke postman
+- lalu di terminal/command prompt run command "php artisan serve"
+- Untuk menjalankan unit test buka terminal/command prompt run command "vendor/bin/phpunit"
+- Untuk dokumentasi postman, silahkan import collection dan environtment ke postman atau link di bawah ini:
+https://documenter.getpostman.com/view/2643413/2s9XxtwuQt
